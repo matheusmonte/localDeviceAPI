@@ -1,4 +1,4 @@
-module main
+module github.com/matheusmonte/localDeviceAPI
 
 go 1.17
 
