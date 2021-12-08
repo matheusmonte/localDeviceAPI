@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/mathesmonte/localDeviceAPI/models"
+	"github.com/mathesmonte/localDeviceAPI/pkg/models"
 	"net/http"
 )
 
