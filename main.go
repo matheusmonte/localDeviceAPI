@@ -1,20 +1,19 @@
 package main
 
 import (
+	"github.com/gin-gonic/gin"
 	"github.com/matheusmonte/localDeviceAPI/pkg/models"
-	"net/http"
+	"github.com/matheusmonte/localDeviceAPI/pkg/controllers"
 )
 
-func handler(w http.ResponseWriter, r *http.Request){
-	w.WriteHeader(200)
-	w.Write([]byte("Local Device API - Local IoT management api"))
-}
-
 func main() {
-	models.ConnectDatabase()
+	r := gin.New()
+	r.Use(gin.Recovery())
 
-	http.HandleFunc("/", handler)
-	if err := http.ListenAndServe(":8080", nil); err != nil {
-		panic(err)
-	}
+	models.ConnectDatabase()
+	r.GET("/devices", controllers.FindDevices)
+	r.GET("/devices/:id", controllers.FindDevice)
+	r.POST("/devices", controllers.CreateNewDevice)
+
+	r.Run(":8080")
 }
